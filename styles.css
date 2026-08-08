@@ -1,0 +1,1219 @@
+/* ========================================================================
+   🌾 Stardew Valley Style Personal Profile — Stylesheet
+   Color Palette inspired by Stardew Valley
+   ======================================================================== */
+
+/* ---------- CSS Variables (Stardew Valley Palette) ---------- */
+:root {
+    /* 核心配色 */
+    --stardew-green: #4CAF50;       /* 草地绿 */
+    --stardew-green-dark: #2E7D32;   /* 深草绿 */
+    --stardew-green-light: #C8E6C9;  /* 浅草绿 */
+    --stardew-sky: #87CEEB;          /* 天空蓝 */
+    --stardew-sky-dark: #4A90D9;    /* 深天蓝 */
+    --stardew-brown: #8B6914;        /* 木头棕 */
+    --stardew-brown-dark: #5D4E0A;   /* 深木棕 */
+    --stardew-brown-light: #D2B48C;  /* 浅木色 */
+    --stardew-gold: #FFD700;         /* 金色 */
+    --stardew-gold-dark: #DAA520;    /* 深金 */
+    --stardew-earth: #8B4513;        /* 泥土棕 */
+    --stardew-cream: #FFF8E1;        /* 奶油白 */
+    --stardew-cream-dark: #FFF3CD;   /* 深奶油 */
+    --stardew-purple: #9C27B0;       /* 魔法紫 */
+    --stardew-pink: #E91E63;         /* 草莓红 */
+    --stardew-orange: #FF9800;       /* 南瓜橙 */
+    --stardew-red: #D32F2F;          /* 警告红 */
+    --stardew-charcoal: #2C2C2C;    /* 深灰（文字） */
+    --stardew-stone: #607D8B;        /* 石头灰 */
+    
+    /* UI 参数 */
+    --pixel-size: 4px;
+    --border-wood: 3px solid var(--stardew-brown);
+    --border-wood-dark: 3px solid var(--stardew-brown-dark);
+    --shadow-pixel: 4px 4px 0 0 rgba(0,0,0,0.15);
+    --shadow-pixel-hover: 6px 6px 0 0 rgba(0,0,0,0.2);
+    --radius-card: 8px;
+    --radius-pixel: 0;
+    --transition: all 0.2s ease;
+    
+    /* 字体 */
+    --font-pixel: 'Press Start 2P', monospace;
+    --font-main: 'Noto Sans SC', 'Microsoft YaHei', sans-serif;
+}
+
+/* ---------- Reset & Base ---------- */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 70px;
+}
+
+body {
+    font-family: var(--font-main);
+    background: linear-gradient(180deg, 
+        var(--stardew-sky) 0%, 
+        #B3E5FC 30%, 
+        #E8F5E9 60%, 
+        var(--stardew-green-light) 100%
+    );
+    background-attachment: fixed;
+    color: var(--stardew-charcoal);
+    min-height: 100vh;
+    overflow-x: hidden;
+    line-height: 1.7;
+    font-size: 15px;
+}
+
+/* ---------- 漂浮装饰 ---------- */
+.floating-decorations {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+}
+
+.deco {
+    position: absolute;
+    font-size: 28px;
+    opacity: 0.4;
+    animation: float 6s ease-in-out infinite;
+}
+
+.deco-sunflower { animation-delay: 0s; }
+.deco-butterfly { animation-delay: 1.5s; font-size: 24px; }
+.deco-clover { animation-delay: 3s; }
+.deco-star { animation-delay: 2s; font-size: 22px; }
+.deco-leaf { animation-delay: 4s; font-size: 26px; }
+.deco-flower { animation-delay: 0.5s; font-size: 24px; }
+.deco-heart { animation-delay: 3.5s; }
+.deco-acorn { animation-delay: 1s; font-size: 22px; }
+
+@keyframes float {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    25% { transform: translateY(-15px) rotate(5deg); }
+    50% { transform: translateY(-8px) rotate(-3deg); }
+    75% { transform: translateY(-20px) rotate(3deg); }
+}
+
+/* ---------- 顶部导航栏 ---------- */
+.top-nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 24px;
+    height: 60px;
+    background: linear-gradient(180deg, var(--stardew-brown) 0%, var(--stardew-brown-dark) 100%);
+    border-bottom: 4px solid var(--stardew-earth);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
+.nav-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.nav-logo {
+    font-size: 28px;
+    animation: sway 3s ease-in-out infinite;
+    display: inline-block;
+}
+
+@keyframes sway {
+    0%, 100% { transform: rotate(-5deg); }
+    50% { transform: rotate(5deg); }
+}
+
+.nav-title {
+    font-family: var(--font-main);
+    font-weight: 700;
+    font-size: 18px;
+    color: var(--stardew-cream);
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+}
+
+.nav-center {
+    display: flex;
+    gap: 6px;
+}
+
+.nav-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 14px;
+    color: var(--stardew-cream);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    border-radius: 6px;
+    transition: var(--transition);
+    white-space: nowrap;
+}
+
+.nav-link:hover {
+    background: rgba(255,255,255,0.15);
+    transform: translateY(-1px);
+}
+
+.nav-link.active {
+    background: var(--stardew-green);
+    color: white;
+    box-shadow: 0 2px 8px rgba(76,175,80,0.4);
+}
+
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.visitor-counter {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(0,0,0,0.3);
+    padding: 6px 14px;
+    border-radius: 20px;
+    color: var(--stardew-gold);
+    font-size: 13px;
+    font-weight: 700;
+    border: 2px solid var(--stardew-gold-dark);
+}
+
+.counter-number {
+    font-family: var(--font-pixel);
+    font-size: 14px;
+    color: var(--stardew-gold);
+    min-width: 20px;
+    text-align: center;
+}
+
+.edit-toggle-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 14px;
+    background: var(--stardew-orange);
+    color: white;
+    border: 2px solid var(--stardew-earth);
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: var(--transition);
+    font-family: var(--font-main);
+}
+
+.edit-toggle-btn:hover {
+    background: #F57C00;
+    transform: translateY(-1px);
+}
+
+.edit-toggle-btn.active {
+    background: var(--stardew-red);
+    animation: pulse-edit 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse-edit {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(211,47,47,0.5); }
+    50% { box-shadow: 0 0 0 8px rgba(211,47,47,0); }
+}
+
+/* ---------- 主内容区 ---------- */
+.main-content {
+    margin-top: 60px;
+    position: relative;
+    z-index: 1;
+    max-width: 1100px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 24px;
+}
+
+.section {
+    display: none;
+    animation: fadeInUp 0.5s ease forwards;
+}
+
+.section.active {
+    display: block;
+}
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* ---------- 横幅区域 ---------- */
+.banner {
+    position: relative;
+    background: linear-gradient(135deg, var(--stardew-green) 0%, var(--stardew-green-dark) 100%);
+    border: 4px solid var(--stardew-earth);
+    border-radius: var(--radius-card);
+    padding: 36px 40px;
+    margin-bottom: 24px;
+    overflow: hidden;
+    box-shadow: var(--shadow-pixel);
+}
+
+.banner::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: 
+        radial-gradient(circle at 15% 50%, rgba(255,255,255,0.08) 0%, transparent 50%),
+        radial-gradient(circle at 85% 30%, rgba(255,215,0,0.1) 0%, transparent 50%);
+    pointer-events: none;
+}
+
+.banner-content {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    gap: 32px;
+}
+
+.pixel-avatar {
+    flex-shrink: 0;
+}
+
+.avatar-placeholder {
+    width: 100px;
+    height: 100px;
+    background: var(--stardew-cream);
+    border: 4px solid var(--stardew-earth);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 48px;
+    color: var(--stardew-brown);
+    box-shadow: inset 0 0 0 4px var(--stardew-brown-light), var(--shadow-pixel);
+}
+
+.banner-text {
+    flex: 1;
+}
+
+.player-name {
+    font-size: 32px;
+    font-weight: 900;
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.4);
+    margin-bottom: 8px;
+}
+
+.player-title {
+    font-size: 16px;
+    color: var(--stardew-cream);
+    margin-bottom: 4px;
+}
+
+.player-intent {
+    font-size: 15px;
+    color: var(--stardew-gold);
+    font-weight: 500;
+    margin-bottom: 16px;
+}
+
+.banner-stats {
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+}
+
+.stat-item {
+    text-align: center;
+    background: rgba(0,0,0,0.2);
+    padding: 8px 16px;
+    border-radius: 8px;
+    border: 2px solid rgba(255,255,255,0.2);
+}
+
+.stat-number {
+    display: block;
+    font-size: 24px;
+    font-weight: 900;
+    color: var(--stardew-gold);
+    font-family: var(--font-pixel);
+    line-height: 1.2;
+}
+
+.stat-label {
+    display: block;
+    font-size: 12px;
+    color: var(--stardew-cream);
+    margin-top: 2px;
+}
+
+/* 云朵装饰 */
+.cloud {
+    position: absolute;
+    font-size: 36px;
+    opacity: 0.6;
+    animation: drift 20s linear infinite;
+}
+
+.cloud-1 { top: 10px; left: -60px; animation-delay: 0s; }
+.cloud-2 { top: 30px; left: -80px; animation-delay: 7s; font-size: 28px; }
+.cloud-3 { top: 60px; left: -50px; animation-delay: 14s; font-size: 32px; }
+
+@keyframes drift {
+    from { transform: translateX(0); }
+    to { transform: translateX(calc(100vw + 100px)); }
+}
+
+/* ---------- 欢迎卡片 ---------- */
+.welcome-card {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    background: var(--stardew-cream);
+    border: 3px solid var(--stardew-brown);
+    border-radius: var(--radius-card);
+    padding: 20px 24px;
+    margin-bottom: 24px;
+    box-shadow: var(--shadow-pixel);
+    position: relative;
+}
+
+.welcome-card::before {
+    content: '';
+    position: absolute;
+    top: 4px; left: 4px; right: 4px; bottom: 4px;
+    border: 2px dashed var(--stardew-brown-light);
+    border-radius: 6px;
+    pointer-events: none;
+}
+
+.welcome-icon {
+    font-size: 36px;
+    flex-shrink: 0;
+    animation: wave 2s ease-in-out infinite;
+}
+
+@keyframes wave {
+    0%, 100% { transform: rotate(0deg); }
+    25% { transform: rotate(-15deg); }
+    75% { transform: rotate(15deg); }
+}
+
+.welcome-text {
+    font-size: 15px;
+    line-height: 1.8;
+    color: var(--stardew-charcoal);
+    position: relative;
+    z-index: 1;
+}
+
+/* ---------- Section Header ---------- */
+.section-header {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.section-header h2 {
+    font-size: 24px;
+    font-weight: 900;
+    color: var(--stardew-green-dark);
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.section-header h2 i {
+    color: var(--stardew-orange);
+}
+
+.section-desc {
+    font-size: 14px;
+    color: var(--stardew-stone);
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* ---------- 卡片网格 ---------- */
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 20px;
+    margin-bottom: 24px;
+}
+
+/* ---------- 卡片通用样式 ---------- */
+.card {
+    background: var(--stardew-cream);
+    border: 3px solid var(--stardew-brown);
+    border-radius: var(--radius-card);
+    padding: 20px;
+    box-shadow: var(--shadow-pixel);
+    transition: var(--transition);
+    position: relative;
+    overflow: hidden;
+}
+
+.card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-pixel-hover);
+}
+
+.card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--stardew-green), var(--stardew-gold), var(--stardew-orange));
+}
+
+.card-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+}
+
+.card-icon {
+    width: 42px;
+    height: 42px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    color: white;
+    flex-shrink: 0;
+    border: 2px solid var(--stardew-earth);
+}
+
+.card-icon.green { background: var(--stardew-green); }
+.card-icon.blue { background: var(--stardew-sky-dark); }
+.card-icon.purple { background: var(--stardew-purple); }
+.card-icon.orange { background: var(--stardew-orange); }
+.card-icon.red { background: var(--stardew-pink); }
+.card-icon.brown { background: var(--stardew-earth); }
+.card-icon.gold { background: var(--stardew-gold-dark); }
+
+.card-title {
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--stardew-charcoal);
+    margin-bottom: 2px;
+}
+
+.card-subtitle {
+    font-size: 12px;
+    color: var(--stardew-stone);
+}
+
+.card-body {
+    font-size: 14px;
+    color: #444;
+    line-height: 1.7;
+    margin-bottom: 12px;
+}
+
+.card-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 12px;
+}
+
+.card-tag {
+    display: inline-block;
+    padding: 2px 10px;
+    background: var(--stardew-green-light);
+    color: var(--stardew-green-dark);
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: 500;
+    border: 1px solid var(--stardew-green);
+}
+
+.card-tag.blue-tag { background: #E3F2FD; color: #1565C0; border-color: #90CAF9; }
+.card-tag.purple-tag { background: #F3E5F5; color: #7B1FA2; border-color: #CE93D8; }
+.card-tag.orange-tag { background: #FFF3E0; color: #E65100; border-color: #FFB74D; }
+
+.card-links {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.card-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 5px 12px;
+    background: var(--stardew-green);
+    color: white;
+    text-decoration: none;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 500;
+    transition: var(--transition);
+    border: 2px solid var(--stardew-green-dark);
+}
+
+.card-link:hover {
+    background: var(--stardew-green-dark);
+    transform: translateY(-1px);
+}
+
+.card-link.secondary {
+    background: var(--stardew-sky-dark);
+    border-color: #2E6DA4;
+}
+
+.card-link.secondary:hover {
+    background: #2E6DA4;
+}
+
+/* ---------- 编辑按钮 ---------- */
+.edit-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--stardew-orange);
+    color: white;
+    border: 2px solid var(--stardew-earth);
+    cursor: pointer;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    transition: var(--transition);
+    z-index: 10;
+}
+
+body.edit-mode .edit-btn {
+    display: flex;
+}
+
+.edit-btn:hover {
+    background: var(--stardew-red);
+    transform: scale(1.1);
+}
+
+.add-card-btn {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 16px;
+    border: 3px dashed var(--stardew-brown);
+    border-radius: var(--radius-card);
+    background: rgba(255,248,225,0.5);
+    color: var(--stardew-brown);
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+    min-height: 120px;
+}
+
+body.edit-mode .add-card-btn {
+    display: flex;
+}
+
+.add-card-btn:hover {
+    background: var(--stardew-green-light);
+    border-color: var(--stardew-green);
+    color: var(--stardew-green-dark);
+}
+
+/* ---------- 编辑模式下的可编辑元素 ---------- */
+body.edit-mode [data-editable] {
+    outline: 2px dashed var(--stardew-orange);
+    outline-offset: 2px;
+    cursor: text;
+    border-radius: 3px;
+    transition: outline-color 0.2s;
+}
+
+body.edit-mode [data-editable]:hover {
+    outline-color: var(--stardew-red);
+    background: rgba(255,152,0,0.08);
+}
+
+body.edit-mode [data-editable].editing {
+    outline: 2px solid var(--stardew-red);
+    background: rgba(255,255,255,0.9);
+}
+
+/* ---------- 工具分类标签 ---------- */
+.tool-categories {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.cat-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 18px;
+    background: var(--stardew-cream);
+    color: var(--stardew-brown);
+    border: 2px solid var(--stardew-brown);
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: var(--transition);
+    font-family: var(--font-main);
+}
+
+.cat-btn:hover {
+    background: var(--stardew-green-light);
+    transform: translateY(-1px);
+}
+
+.cat-btn.active {
+    background: var(--stardew-green);
+    color: white;
+    border-color: var(--stardew-green-dark);
+    box-shadow: 0 2px 8px rgba(76,175,80,0.3);
+}
+
+/* ---------- 联系方式 ---------- */
+.contact-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.contact-card {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    background: var(--stardew-cream);
+    border: 3px solid var(--stardew-brown);
+    border-radius: var(--radius-card);
+    padding: 16px 20px;
+    text-decoration: none;
+    color: inherit;
+    transition: var(--transition);
+    box-shadow: var(--shadow-pixel);
+}
+
+.contact-card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-pixel-hover);
+    background: white;
+}
+
+.contact-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    color: white;
+    flex-shrink: 0;
+    border: 2px solid var(--stardew-earth);
+}
+
+.contact-icon { background: var(--stardew-sky-dark); }
+.contact-card:nth-child(2) .contact-icon { background: var(--stardew-charcoal); }
+.contact-card:nth-child(3) .contact-icon { background: var(--stardew-orange); }
+.contact-card:nth-child(4) .contact-icon { background: var(--stardew-green); }
+
+.contact-info h3 {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--stardew-brown-dark);
+    margin-bottom: 2px;
+}
+
+.contact-info p {
+    font-size: 13px;
+    color: var(--stardew-stone);
+}
+
+/* ---------- 留言板 ---------- */
+.message-board {
+    background: var(--stardew-cream);
+    border: 3px solid var(--stardew-brown);
+    border-radius: var(--radius-card);
+    padding: 24px;
+    box-shadow: var(--shadow-pixel);
+}
+
+.message-board h3 {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--stardew-green-dark);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.message-input-area {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.message-input-area input {
+    flex: 1;
+    padding: 10px 16px;
+    border: 2px solid var(--stardew-brown);
+    border-radius: 8px;
+    font-size: 14px;
+    font-family: var(--font-main);
+    background: white;
+    color: var(--stardew-charcoal);
+    outline: none;
+    transition: var(--transition);
+}
+
+.message-input-area input:focus {
+    border-color: var(--stardew-green);
+    box-shadow: 0 0 0 3px rgba(76,175,80,0.2);
+}
+
+.pixel-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 10px 20px;
+    background: var(--stardew-green);
+    color: white;
+    border: 2px solid var(--stardew-green-dark);
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: var(--transition);
+    font-family: var(--font-main);
+    box-shadow: 0 3px 0 var(--stardew-green-dark);
+}
+
+.pixel-btn:hover {
+    background: var(--stardew-green-dark);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 0 var(--stardew-green-dark);
+}
+
+.pixel-btn:active {
+    transform: translateY(2px);
+    box-shadow: 0 1px 0 var(--stardew-green-dark);
+}
+
+.message-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.message-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 12px 16px;
+    background: white;
+    border: 2px solid var(--stardew-brown-light);
+    border-radius: 8px;
+    animation: fadeInUp 0.3s ease forwards;
+}
+
+.message-avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--stardew-green-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    flex-shrink: 0;
+    border: 2px solid var(--stardew-green);
+}
+
+.message-content {
+    flex: 1;
+}
+
+.message-text {
+    font-size: 14px;
+    color: var(--stardew-charcoal);
+    line-height: 1.5;
+}
+
+.message-time {
+    font-size: 11px;
+    color: var(--stardew-stone);
+    margin-top: 2px;
+}
+
+.message-delete {
+    background: none;
+    border: none;
+    color: var(--stardew-stone);
+    cursor: pointer;
+    font-size: 14px;
+    padding: 4px;
+    border-radius: 4px;
+    transition: var(--transition);
+}
+
+.message-delete:hover {
+    background: #FFEBEE;
+    color: var(--stardew-red);
+}
+
+/* ---------- 底部 ---------- */
+.footer {
+    margin-top: 40px;
+    padding: 24px;
+    text-align: center;
+    background: linear-gradient(180deg, transparent 0%, var(--stardew-brown-dark) 100%);
+    color: var(--stardew-cream);
+    position: relative;
+    z-index: 1;
+}
+
+.footer-content p {
+    font-size: 14px;
+    margin-bottom: 4px;
+}
+
+.footer-meta {
+    font-size: 12px !important;
+    opacity: 0.7;
+}
+
+/* ---------- 编辑提示 Toast ---------- */
+.edit-toast {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%) translateY(80px);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 24px;
+    background: var(--stardew-charcoal);
+    color: white;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    z-index: 2000;
+    opacity: 0;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+}
+
+.edit-toast.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}
+
+/* ---------- Konami 彩蛋 ---------- */
+.konami-hint {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    z-index: 3000;
+    padding: 24px 48px;
+    background: linear-gradient(135deg, #FF0000, #FF7F00, #FFFF00, #00FF00, #0000FF, #4B0082, #9400D3);
+    background-size: 400% 400%;
+    animation: rainbow-bg 2s ease infinite;
+    border-radius: 16px;
+    font-size: 24px;
+    font-weight: 900;
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+    transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+}
+
+.konami-hint.show {
+    transform: translate(-50%, -50%) scale(1);
+}
+
+@keyframes rainbow-bg {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+}
+
+/* 彩虹模式下的全局效果 */
+body.rainbow-mode {
+    animation: rainbow-bg 6s ease infinite;
+}
+
+body.rainbow-mode .top-nav {
+    background: linear-gradient(180deg, #FF6B6B 0%, #9B59B6 100%);
+}
+
+/* ---------- 模态框 ---------- */
+.modal-overlay {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,0.6);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 2500;
+    animation: fadeIn 0.2s ease;
+}
+
+.modal-overlay.show {
+    display: flex;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.modal {
+    background: var(--stardew-cream);
+    border: 4px solid var(--stardew-brown);
+    border-radius: 12px;
+    padding: 28px;
+    width: 90%;
+    max-width: 500px;
+    max-height: 80vh;
+    overflow-y: auto;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+    animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes popIn {
+    from { transform: scale(0.8); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+.modal h3 {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--stardew-green-dark);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.modal-form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.modal-form label {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--stardew-brown-dark);
+}
+
+.modal-form input,
+.modal-form textarea,
+.modal-form select {
+    padding: 10px 14px;
+    border: 2px solid var(--stardew-brown);
+    border-radius: 8px;
+    font-size: 14px;
+    font-family: var(--font-main);
+    background: white;
+    color: var(--stardew-charcoal);
+    outline: none;
+    transition: var(--transition);
+}
+
+.modal-form input:focus,
+.modal-form textarea:focus,
+.modal-form select:focus {
+    border-color: var(--stardew-green);
+    box-shadow: 0 0 0 3px rgba(76,175,80,0.2);
+}
+
+.modal-form textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
+.modal-actions {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+    margin-top: 8px;
+}
+
+.modal-actions .btn-cancel {
+    padding: 10px 20px;
+    background: var(--stardew-stone);
+    color: white;
+    border: 2px solid #455A64;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: var(--transition);
+    font-family: var(--font-main);
+}
+
+.modal-actions .btn-cancel:hover {
+    background: #455A64;
+}
+
+/* ---------- 响应式 ---------- */
+@media (max-width: 768px) {
+    .top-nav {
+        padding: 0 12px;
+        height: 54px;
+    }
+    
+    .nav-center {
+        display: none;
+    }
+    
+    .nav-title {
+        font-size: 15px;
+    }
+    
+    .visitor-counter {
+        padding: 4px 10px;
+        font-size: 12px;
+    }
+    
+    .edit-toggle-btn {
+        padding: 4px 10px;
+        font-size: 12px;
+    }
+    
+    .main-content {
+        padding: 16px;
+        margin-top: 54px;
+    }
+    
+    .banner {
+        padding: 24px 20px;
+    }
+    
+    .banner-content {
+        flex-direction: column;
+        text-align: center;
+        gap: 16px;
+    }
+    
+    .banner-stats {
+        justify-content: center;
+    }
+    
+    .player-name {
+        font-size: 24px;
+    }
+    
+    .card-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .contact-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .tool-categories {
+        gap: 6px;
+    }
+    
+    .cat-btn {
+        padding: 6px 12px;
+        font-size: 12px;
+    }
+    
+    .message-input-area {
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 480px) {
+    .nav-right .visitor-counter span:first-child {
+        display: none;
+    }
+    
+    .welcome-card {
+        flex-direction: column;
+        text-align: center;
+    }
+}
+
+/* ---------- 滚动条美化 ---------- */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--stardew-cream);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--stardew-brown);
+    border-radius: 5px;
+    border: 2px solid var(--stardew-cream);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--stardew-brown-dark);
+}
+
+/* ---------- 数字滚动动画 ---------- */
+@keyframes countUp {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.stat-number.animate {
+    animation: countUp 0.5s ease forwards;
+}
+
+/* ---------- 卡片入场动画 ---------- */
+.card {
+    animation: cardEnter 0.4s ease forwards;
+}
+
+@keyframes cardEnter {
+    from { opacity: 0; transform: translateY(15px) scale(0.97); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* ---------- 空状态提示 ---------- */
+.empty-state {
+    text-align: center;
+    padding: 40px 20px;
+    color: var(--stardew-stone);
+}
+
+.empty-state i {
+    font-size: 48px;
+    margin-bottom: 12px;
+    opacity: 0.5;
+}
+
+.empty-state p {
+    font-size: 15px;
+}

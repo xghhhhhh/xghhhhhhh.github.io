@@ -1,0 +1,20 @@
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Node (if you add build tools later)
+node_modules/
+dist/
+build/
+
+# Logs
+*.log
+
+# Local data export (optional, keep your data private)
+localStorage-export.json
